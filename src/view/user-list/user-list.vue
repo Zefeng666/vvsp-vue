@@ -115,6 +115,20 @@
           <a v-show="!isEditAmount" @click="alterUser(2)">保存</a>
         </p>
         <p style="margin-bottom: 10px;">
+          <span style="display: inline-block; width: 60px;">修改库存:</span>
+          <Input v-model="editUserObj.lastQuantity" placeholder="Enter something..." style="width: 200px; margin-right: 10px;" :disabled="isChangeStock" />
+          <a v-show="isChangeStock" @click="isChangeStock = false">修改</a>
+          <a v-show="!isChangeStock" @click="alterUser(5)">保存</a>
+        </p>
+        <p style="margin-bottom: 10px;">
+          <span style="display: inline-block; width: 60px;">会员等级:</span>
+          <Select v-model="changeVipLevel" style="width:120px" clearable :disabled="isChangeLevel">
+            <Option v-for="(value, key) in vipLevelArr" :value="value.value" :key="key">{{ value.label }}</Option>
+          </Select>&nbsp;&nbsp;
+          <a v-show="isChangeLevel" @click="isChangeLevel = false">修改</a>
+          <a v-show="!isChangeLevel" @click="alterUser(4)">保存</a>
+        </p>
+        <p style="margin-bottom: 10px;">
           <span style="display: inline-block; width: 60px;">设置代理:</span>
           <RadioGroup v-model="whichProxy">
               <Radio label="1" :disabled="isEditProxy">县区代理</Radio>
@@ -164,6 +178,8 @@ export default {
       isEditUsername: true,
       isEditPhone: true,
       isEditAmount: true,
+      isChangeStock: true,
+      isChangeLevel: true,
       isEditProxy: true,
       userListLoading: true,
       userList: [],
@@ -172,7 +188,26 @@ export default {
       viewUserTree: {},
       editUserObj: {},
       changeAmount: 0,
+      changeVipLevel: '',
       isShowPage: true,
+      vipLevelArr: [
+        {
+          value: '-1',
+          label: '普通用户'
+        },
+        {
+          value: '0',
+          label: 'VIP'
+        },
+        {
+          value: '1',
+          label: '经销商'
+        },
+        {
+          value: '2',
+          label: '总代理'
+        }
+      ],
       userListColumns: [
         {
           title: '序号',
@@ -598,6 +633,12 @@ export default {
           text = this.addressList['86'][this.proxyProvince] + '-' + this.addressList[this.proxyProvince][this.proxyCity] + '-' + this.addressList[this.proxyCity][this.proxyArea]
           this.isEditProxy = true
         }
+      } else if (type === 4) {
+        text = this.changeVipLevel
+        this.isChangeLevel = true
+      } else if (type === 5) {
+        text = this.editUserObj.lastQuantity
+        this.isChangeStock = true
       }
       this.$api
         .alterUser({
