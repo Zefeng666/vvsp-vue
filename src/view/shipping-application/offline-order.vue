@@ -60,7 +60,7 @@ export default {
         {
           title: '支付确认',
           key: 'action',
-          width: 100,
+          width: 140,
           align: 'center',
           render: (h, params) => {
             return h('div', [
@@ -76,11 +76,29 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.payFinishOrder(params.row.order.id)
+                      this.payFinishOrder(params.row.order.id, 1)
                     }
                   }
                 },
                 '确认'
+              ),
+              h(
+                'Button',
+                {
+                  props: {
+                    type: 'error',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      this.payFinishOrder(params.row.order.id, 2)
+                    }
+                  }
+                },
+                '取消'
               )
             ])
           }
@@ -109,10 +127,11 @@ export default {
           }
         })
     },
-    payFinishOrder (id) {
+    payFinishOrder (id, audit) {
       this.$api
         .payFinishOrder({
-          id: id
+          id: id,
+          audit: audit
         })
         .then(data => {
           if (data.code === 200) {
