@@ -122,6 +122,20 @@ const API = {
       params: params
     })
   },
+  // 查询线下支付订单
+  queryOfflineOrder(params) {
+    return request({
+      url: '/queryOfflineOrder',
+      params: params
+    })
+  },
+  // 将订单置为支付状态
+  payFinishOrder(params) {
+    return request({
+      url: '/payFinishOrder',
+      params: params
+    })
+  },
   // 身份证审核
   queryUnReviewIdCard (params) {
     return request({
