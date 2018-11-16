@@ -130,7 +130,7 @@ export default {
     payFinishOrder (id, audit) {
       this.$api
         .payFinishOrder({
-          id: id,
+          orderId: id,
           audit: audit
         })
         .then(data => {
