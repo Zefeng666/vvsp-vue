@@ -78,7 +78,7 @@ export default {
               ),
               h(
                 'p',
-                '总代理：' + params.row.proxyPrice
+                '商务批发商：' + params.row.proxyPrice
               )
             ])
           }

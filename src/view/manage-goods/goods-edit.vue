@@ -19,7 +19,7 @@
             <Input v-model="formItem.vipPrice" placeholder="" style="width: 100px" /> 元/件 &nbsp;&nbsp;
             经销商价格:
             <Input v-model="formItem.dealerPrice" placeholder="" style="width: 100px" /> 元/件 &nbsp;&nbsp;
-            总代理价格:
+            商务批发商价格:
             <Input v-model="formItem.proxyPrice" placeholder="" style="width: 100px" /> 元/件
         </FormItem>
         <FormItem label="商品简介">
